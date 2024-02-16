@@ -2,7 +2,7 @@ function check_colition() {
     let i = 0;
     let j = 0;
     while(i<snake_arr.length) {
-        if (snake_arr[i][0] >= spalten || snake_arr[i][0] < 0 || snake_arr[i][1] >= zeilen || snake_arr[i][1] < 0) {
+        if (snake_arr[i][0] >= spalten || snake_arr[i][0] <= 0 || snake_arr[i][1] >= zeilen || snake_arr[i][1] <= 0) {
             return true;
         }
         j = 0;
