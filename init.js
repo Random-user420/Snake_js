@@ -7,6 +7,7 @@ let direction_chanched = false;
 let eaten_apple = false;
 let apple = [];
 apple = create_apple();
+let is_pause = false;
 
 draw_initaial_field();
-setInterval(main_loop, 100);
+let Interval = setInterval(main_loop, 100);

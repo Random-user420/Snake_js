@@ -1,47 +1,61 @@
 
-function d_right () {
+function d_right() {
     if (direction[0] === 0) {
-        direction = [1,0];
+        direction = [1, 0];
     }
 }
-function d_left () {
+function d_left() {
     if (direction[0] === 0) {
-        direction = [-1,0];
+        direction = [-1, 0];
     }
-}function d_up () {
+} 
+function d_up() {
     if (direction[1] === 0) {
-        direction = [0,-1];
+        direction = [0, -1];
     }
-}function d_down () {
+} 
+function d_down() {
     if (direction[1] === 0) {
-        direction = [0,1];
+        direction = [0, 1];
     }
+}
+function pause() {
+    if (is_pause) {    
+        Interval = setInterval(main_loop, 100);
+    }
+    else {
+        clearInterval(Interval);
+    }
+    is_pause = ! is_pause;
 }
 
 window.addEventListener("keydown", function (event) {
+    if (event.key == 'p') {
+        pause();
+    }
     if (event.defaultPrevented) {
         return; // Do nothing if the event was already processed
     }
-    if (direction_chanched == false){
+    if (direction_chanched == false) {
         switch (event.key) {
             case 'w':
                 d_up();
-            break;
+                break;
             case 'a':
                 d_left();
-            break;
+                break;
             case 's':
                 d_down();
-            break;
+                break;
             case 'd':
                 d_right();
-            break;
+                break;
             default:
-            return; // Quit when this doesn't handle the key event.
+                return; // Quit when this doesn't handle the key event.
         }
         direction_chanched = true;
     }
-    
-      // Cancel the default action to avoid it being handled twice
-      event.preventDefault();
+
+    // Cancel the default action to avoid it being handled twice
+    event.preventDefault();
 }, true);
