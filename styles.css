@@ -1,0 +1,21 @@
+.tile {
+    height: 3vh;
+    padding: 0px;
+    margin-bottom: 0px;
+    width: 3vh;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.main-grid{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+body{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+}
