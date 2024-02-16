@@ -8,7 +8,6 @@ resize to specific size causes weired drawing:
 solution:
   -  resize
   -  refresh and the problem gets eventually fixed
-  -  
 Genneral:
 not native resoluton causes white lines between the tiles
 fix:
