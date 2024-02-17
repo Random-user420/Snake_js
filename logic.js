@@ -2,7 +2,7 @@ function check_colition() {
     let i = 0;
     let j = 0;
     while(i<snake_arr.length) {
-        if (snake_arr[i][0] >= spalten || snake_arr[i][0] <= 0 || snake_arr[i][1] >= zeilen || snake_arr[i][1] <= 0) {
+        if (snake_arr[i][0] >= spalten || snake_arr[i][0] < 0 || snake_arr[i][1] >= zeilen || snake_arr[i][1] < 0) {
             return true;
         }
         j = 0;
@@ -18,7 +18,22 @@ function check_colition() {
 }
 
 function end() {
-    window.location.reload();
+    snake_arr = [[3,1], [1,1], [2,1]];
+    direction = [1,0];
+    direction_chanched = false;
+    eaten_apple = false;
+    pause();
+}
+
+function pause() {
+    if (is_pause) {    
+        Interval = setInterval(main_loop, 100);
+    }
+    else {
+        clearInterval(Interval);
+    }
+    is_pause = ! is_pause;
+    draw_pause();
 }
 
 function check_apple() {

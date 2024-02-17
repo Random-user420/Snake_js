@@ -19,15 +19,6 @@ function d_down() {
         direction = [0, 1];
     }
 }
-function pause() {
-    if (is_pause) {    
-        Interval = setInterval(main_loop, 100);
-    }
-    else {
-        clearInterval(Interval);
-    }
-    is_pause = ! is_pause;
-}
 
 window.addEventListener("keydown", function (event) {
     if (event.key == 'p') {

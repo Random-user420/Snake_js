@@ -46,3 +46,12 @@ function draw_snake() {
     }
     direction_chanched = false;
 }
+
+function draw_pause() {
+    if (is_pause) {
+        document.getElementById('pause').style.display = 'flex';
+    }
+    else {
+        document.getElementById('pause').style.display = 'none';
+    }
+}

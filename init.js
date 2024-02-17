@@ -11,3 +11,5 @@ let is_pause = false;
 
 draw_initaial_field();
 let Interval = setInterval(main_loop, 100);
+draw_snake();
+pause();

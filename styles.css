@@ -7,15 +7,24 @@
     text-decoration: none;
 }
 
-.main-grid{
+.main-grid {
     display: flex;
     flex-wrap: wrap;
 }
 
 body{
-    width: 90%;
+     width: 90%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 0;
     margin-bottom: 0;
+}
+.pause {
+    margin-top: -39%;
+    margin-left: auto;
+    width: max-content;
+    margin-right: auto;
+    font-size: 700%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(129, 14, 14);
 }
