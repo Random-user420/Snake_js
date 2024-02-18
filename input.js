@@ -8,12 +8,12 @@ function d_left() {
     if (direction[0] === 0) {
         direction = [-1, 0];
     }
-} 
+}
 function d_up() {
     if (direction[1] === 0) {
         direction = [0, -1];
     }
-} 
+}
 function d_down() {
     if (direction[1] === 0) {
         direction = [0, 1];
@@ -21,32 +21,30 @@ function d_down() {
 }
 
 window.addEventListener("keydown", function (event) {
-    if (event.key == 'p') {
-        pause();
+    switch (event.key) {
+        case 'f':
+            faster_movement();
+            break;
+        case 'p':
+            pause();
+            break;
+        case 'w':
+            if (direction_chanched == false) { d_up(); }
+            direction_chanched = true;
+            break;
+        case 'a':
+            if (direction_chanched == false) { d_left(); }
+            direction_chanched = true;
+            break;
+        case 's':
+            if (direction_chanched == false) { d_down(); }
+            direction_chanched = true;
+            break;
+        case 'd':
+            if (direction_chanched == false) { d_right(); }
+            direction_chanched = true;
+            break;
+        default:
+            return; // Quit when this doesn't handle the key event.
     }
-    if (event.defaultPrevented) {
-        return; // Do nothing if the event was already processed
-    }
-    if (direction_chanched == false) {
-        switch (event.key) {
-            case 'w':
-                d_up();
-                break;
-            case 'a':
-                d_left();
-                break;
-            case 's':
-                d_down();
-                break;
-            case 'd':
-                d_right();
-                break;
-            default:
-                return; // Quit when this doesn't handle the key event.
-        }
-        direction_chanched = true;
-    }
-
-    // Cancel the default action to avoid it being handled twice
-    event.preventDefault();
 }, true);

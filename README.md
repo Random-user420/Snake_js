@@ -1,6 +1,10 @@
 # Snake
 ### Controls:
+##### movement:
 w,a,s,d
+##### other:
+Pause: p
+Faster: f
 ### Know, but don't plan to fix:
 
 Chromium:

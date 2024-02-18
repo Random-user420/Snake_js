@@ -10,8 +10,9 @@ apple = create_apple();
 let is_pause = false;
 let score = 0;
 set_high_score();
+let speed = 150;
 
 draw_initaial_field();
-let Interval = setInterval(main_loop, 100);
+let Interval = setInterval(main_loop, speed);
 draw_snake();
 pause();

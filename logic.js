@@ -29,7 +29,7 @@ function end() {
 
 function pause() {
     if (is_pause) {
-        Interval = setInterval(main_loop, 100);
+        Interval = setInterval(main_loop, speed);
     }
     else {
         clearInterval(Interval);
@@ -77,5 +77,18 @@ function move_snake() {
 function set_high_score() {
     if (localStorage.getItem("score") === null || localStorage.getItem("score") < score) {
         localStorage.setItem("score", score);
+    }
+}
+
+function faster_movement() {
+    if (speed === 150) {
+        speed = 50;
+    }
+    else {
+        speed = 150;
+    }
+    clearInterval(Interval);
+    if (is_pause == false) {
+        Interval = setInterval(main_loop, speed);
     }
 }
