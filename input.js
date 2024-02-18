@@ -29,22 +29,20 @@ window.addEventListener("keydown", function (event) {
             pause();
             break;
         case 'w':
-            if (direction_chanched == false) { d_up(); }
+            if (!direction_chanched) { d_up(); }
             direction_chanched = true;
             break;
         case 'a':
-            if (direction_chanched == false) { d_left(); }
+            if (!direction_chanched) { d_left(); }
             direction_chanched = true;
             break;
         case 's':
-            if (direction_chanched == false) { d_down(); }
+            if (!direction_chanched) { d_down(); }
             direction_chanched = true;
             break;
         case 'd':
-            if (direction_chanched == false) { d_right(); }
+            if (!direction_chanched) { d_right(); }
             direction_chanched = true;
             break;
-        default:
-            return; // Quit when this doesn't handle the key event.
     }
 }, true);

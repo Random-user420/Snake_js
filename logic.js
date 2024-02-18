@@ -2,9 +2,11 @@ function check_colition() {
     let i = 0;
     let j = 0;
     while (i < snake_arr.length) {
+        //out of field check
         if (snake_arr[i][0] >= spalten || snake_arr[i][0] < 0 || snake_arr[i][1] >= zeilen || snake_arr[i][1] < 0) {
             return true;
         }
+        //interfiering with itself
         j = 0;
         while (j < snake_arr.length) {
             if (snake_arr[i][0] == snake_arr[j][0] && snake_arr[i][1] == snake_arr[j][1] && i != j) {
@@ -88,7 +90,7 @@ function faster_movement() {
         speed = std_speed;
     }
     clearInterval(Interval);
-    if (is_pause == false) {
+    if (!is_pause) {
         Interval = setInterval(main_loop, speed);
     }
 }

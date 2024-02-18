@@ -5,6 +5,7 @@ function draw_apple() {
 function draw_new_field_over_snake() {
     let i = 0;
     while (i < snake_arr.length) {
+        //uneven field get a lighter green
         if (snake_arr[i][0] % 2 == 1 && snake_arr[i][1] % 2 == 0 || snake_arr[i][0] % 2 == 0 && snake_arr[i][1] % 2 == 1) {
             document.getElementById(snake_arr[i].toString()).style.backgroundColor = "rgb(10, 191, 5)";
         } else {
@@ -19,10 +20,12 @@ function draw_initaial_field() {
     while (h < zeilen) {
         let w = 0;
         while (w < spalten) {
+            //create the tile as a div
             const element = document.createElement("div");
             element.id = w.toString() + "," + h.toString();
             element.className = "tile";
             element.innerHTML = "";
+            //uneven field get a lighter green
             if (h % 2 == 1 && w % 2 == 0 || h % 2 == 0 && w % 2 == 1) {
                 element.style.backgroundColor = "rgb(10, 191, 5)";
             } else {
@@ -31,9 +34,6 @@ function draw_initaial_field() {
             main_gr.appendChild(element);
             w++;
         }
-        const element = document.createElement("br");
-        element.innerHTML = "br";
-        main_gr.appendChild(element);
         h++;
     }
 }
