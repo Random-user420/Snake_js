@@ -17,4 +17,4 @@ use the native resolution and don't scale youre window in the browser
 ### Tested Browser:
 Firefox (Linux, Windows)
 Chromium (Linux)
-Chrom (Windows)
+Chrome (Windows)
