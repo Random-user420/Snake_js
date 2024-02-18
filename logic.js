@@ -81,11 +81,11 @@ function set_high_score() {
 }
 
 function faster_movement() {
-    if (speed === 150) {
-        speed = 50;
+    if (speed == std_speed) {
+        speed = fas_speed;
     }
     else {
-        speed = 150;
+        speed = std_speed;
     }
     clearInterval(Interval);
     if (is_pause == false) {

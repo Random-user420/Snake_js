@@ -11,6 +11,8 @@ let is_pause = false;
 let score = 0;
 set_high_score();
 let speed = 150;
+const std_speed = 150;
+const fas_speed = 50;
 
 draw_initaial_field();
 let Interval = setInterval(main_loop, speed);
