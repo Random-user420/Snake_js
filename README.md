@@ -9,7 +9,7 @@ Faster: f
 
 Chromium:\
 resize to specific size causes weired drawing:\
-solution:\
+solution:
   -  resize
   -  refresh and the problem gets eventually fixed\
 Genneral:\
