@@ -3,7 +3,7 @@
 ##### movement:
 w,a,s,d
 ##### other:
-Pause: p
+Pause: p\
 Faster: f
 ### Know, but don't plan to fix:
 
