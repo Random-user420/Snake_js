@@ -20,7 +20,7 @@ function check_colition() {
 }
 
 function end() {
-    snake_arr = [[3, 1], [1, 1], [2, 1]];
+    snake_arr = [[3, 1], [2, 1], [1, 1]];
     direction = [1, 0];
     direction_chanched = false;
     eaten_apple = false;

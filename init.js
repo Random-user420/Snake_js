@@ -1,7 +1,7 @@
 const main_gr = document.getElementById("main-grid");
 const zeilen = 33;
-const spalten = Math.floor(((window.innerWidth / window.innerHeight) * 33.3333333) * 0.90);
-let snake_arr = [[3, 1], [1, 1], [2, 1]];
+const spalten = Math.round(((window.innerWidth / window.innerHeight) * (100 / 3)) * 0.90) - 1;
+let snake_arr = [[3, 1], [2, 1], [1, 1]];
 let direction = [1, 0];
 let direction_chanched = false;
 let eaten_apple = false;
