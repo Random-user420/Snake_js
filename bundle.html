@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.tile {
+    height: 3vh;
+    padding: 0px;
+    margin-bottom: 0px;
+    width: 3vh;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.main-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+body {
+    width: 90%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.pause {
+    margin-top: -70vh;
+    margin-left: auto;
+    width: max-content;
+    margin-right: auto;
+    font-size: 8vw;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(129, 14, 14);
+}
+
+.score {
+    margin-top: -0vh;
+    margin-left: auto;
+    width: max-content;
+    margin-right: auto;
+    font-size: 7vw;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(2, 0, 143);
+}
+</style>
+</head>
+<body id="body">
+<div class="main-grid" id="main-grid"></div>
+<div id="pause" class="pause">Press 'P' to unpause</div>
+<div id="score" class="score">Score: <br> Hight score:</div>
+<script defer>
+function draw_apple() {
+    document.getElementById(apple.toString()).style.backgroundColor = "rgb(255, 60, 60)"
+}
+
+function draw_new_field_over_snake() {
+    let i = 0;
+    while (i < snake_arr.length) {
+        //uneven field get a lighter green
+        if (snake_arr[i][0] % 2 == 1 && snake_arr[i][1] % 2 == 0 || snake_arr[i][0] % 2 == 0 && snake_arr[i][1] % 2 == 1) {
+            document.getElementById(snake_arr[i].toString()).style.backgroundColor = "rgb(10, 191, 5)";
+        } else {
+            document.getElementById(snake_arr[i].toString()).style.backgroundColor = "rgb(65, 255, 60)";
+        }
+        i++;
+    }
+}
+
+function draw_initaial_field() {
+    let h = 0;
+    while (h < zeilen) {
+        let w = 0;
+        while (w < spalten) {
+            //create the tile as a div
+            const element = document.createElement("div");
+            element.id = w.toString() + "," + h.toString();
+            element.className = "tile";
+            element.innerHTML = "";
+            //uneven field get a lighter green
+            if (h % 2 == 1 && w % 2 == 0 || h % 2 == 0 && w % 2 == 1) {
+                element.style.backgroundColor = "rgb(10, 191, 5)";
+            } else {
+                element.style.backgroundColor = "rgb(65, 255, 60)";
+            }
+            main_gr.appendChild(element);
+            w++;
+        }
+        h++;
+    }
+}
+
+function draw_snake() {
+    let i = 0;
+    while (i < snake_arr.length) {
+        document.getElementById(snake_arr[i].toString()).style.backgroundColor = "rgb(60, 60, 255)";
+        i++;
+    }
+    direction_chanched = false;
+}
+
+function draw_pause_menu() {
+    if (is_pause) {
+        document.getElementById('pause').style.display = 'flex';
+        document.getElementById('score').style.display = 'flex';
+        document.getElementById('score').innerHTML = "Score: " + score + "<br>Hight Score: " + localStorage.getItem("score");
+
+    }
+    else {
+        document.getElementById('pause').style.display = 'none';
+        document.getElementById('score').style.display = 'none';
+    }
+}
+
+function d_right() {
+    if (direction[0] === 0) {
+        direction = [1, 0];
+    }
+}
+function d_left() {
+    if (direction[0] === 0) {
+        direction = [-1, 0];
+    }
+}
+function d_up() {
+    if (direction[1] === 0) {
+        direction = [0, -1];
+    }
+}
+function d_down() {
+    if (direction[1] === 0) {
+        direction = [0, 1];
+    }
+}
+
+window.addEventListener("keydown", function (event) {
+    switch (event.key) {
+        case 'f':
+            faster_movement();
+            break;
+        case 'p':
+            pause();
+            break;
+        case 'w':
+            if (!direction_chanched) { d_up(); }
+            direction_chanched = true;
+            break;
+        case 'a':
+            if (!direction_chanched) { d_left(); }
+            direction_chanched = true;
+            break;
+        case 's':
+            if (!direction_chanched) { d_down(); }
+            direction_chanched = true;
+            break;
+        case 'd':
+            if (!direction_chanched) { d_right(); }
+            direction_chanched = true;
+            break;
+    }
+}, true);
+function check_colition() {
+    let i = 0;
+    let j = 0;
+    while (i < snake_arr.length) {
+        //out of field check
+        if (snake_arr[i][0] >= spalten || snake_arr[i][0] < 0 || snake_arr[i][1] >= zeilen || snake_arr[i][1] < 0) {
+            return true;
+        }
+        //interfiering with itself
+        j = 0;
+        while (j < snake_arr.length) {
+            if (snake_arr[i][0] == snake_arr[j][0] && snake_arr[i][1] == snake_arr[j][1] && i != j) {
+                return true;
+            }
+            j++;
+        }
+        i++;
+    }
+    return false;
+}
+
+function end() {
+    snake_arr = [[3, 1], [2, 1], [1, 1]];
+    direction = [1, 0];
+    direction_chanched = false;
+    eaten_apple = false;
+    set_high_score();
+    score = 0;
+    pause();
+}
+
+function pause() {
+    if (is_pause) {
+        Interval = setInterval(main_loop, speed);
+    }
+    else {
+        clearInterval(Interval);
+    }
+    is_pause = !is_pause;
+    draw_pause_menu();
+}
+
+function check_apple() {
+    if (snake_arr[0][0] == apple[0] && snake_arr[0][1] == apple[1]) {
+        apple = create_apple();
+        eaten_apple = true;
+        score++;
+    }
+}
+
+function create_apple() {
+    const x = Math.floor(Math.random() * spalten);
+    const y = Math.floor(Math.random() * zeilen);
+    let i = 0;
+    while (i < snake_arr.length) {
+        if (snake_arr[i][0] == x && snake_arr[i][1] == y) {
+            return create_apple();
+        }
+        i++;
+    }
+    return [x, y]
+}
+
+function move_snake() {
+    if (eaten_apple) {
+        snake_arr.push([null, null]);
+        eaten_apple = false;
+    }
+    let i = snake_arr.length - 1;
+    while (i > 0) {
+        snake_arr[i][0] = snake_arr[i - 1][0];
+        snake_arr[i][1] = snake_arr[i - 1][1];
+        i--;
+    }
+    snake_arr[0][0] += direction[0];
+    snake_arr[0][1] += direction[1];
+}
+
+function set_high_score() {
+    if (localStorage.getItem("score") === null || localStorage.getItem("score") < score) {
+        localStorage.setItem("score", score);
+    }
+}
+
+function faster_movement() {
+    if (speed == std_speed) {
+        speed = fas_speed;
+    }
+    else {
+        speed = std_speed;
+    }
+    clearInterval(Interval);
+    if (!is_pause) {
+        Interval = setInterval(main_loop, speed);
+    }
+}
+function main_loop() {
+    draw_new_field_over_snake();
+    check_apple();
+    move_snake();
+    if (check_colition()) {
+        end();
+    }
+    draw_apple();
+    draw_snake();
+}
+const main_gr = document.getElementById("main-grid");
+const zeilen = 33;
+const spalten = Math.round(((window.innerWidth / window.innerHeight) * (100 / 3)) * 0.90) - 1;
+let snake_arr = [[3, 1], [2, 1], [1, 1]];
+let direction = [1, 0];
+let direction_chanched = false;
+let eaten_apple = false;
+let apple = [];
+apple = create_apple();
+let is_pause = false;
+let score = 0;
+set_high_score();
+let speed = 150;
+const std_speed = 150;
+const fas_speed = 50;
+
+draw_initaial_field();
+let Interval = setInterval(main_loop, speed);
+draw_snake();
+pause();
+</script>
+</body>
+</html> 
