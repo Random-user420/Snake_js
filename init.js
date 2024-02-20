@@ -1,6 +1,6 @@
 const main_gr = document.getElementById("main-grid");
 const zeilen = 33;
-const spalten = Math.round(((window.innerWidth / window.innerHeight) * (100 / 3)) * 0.90) - 1;
+const spalten = Math.floor(((window.innerWidth / window.innerHeight) * (100 / 3)) * 0.90);
 let snake_arr = [[3, 1], [2, 1], [1, 1]];
 let direction = [1, 0];
 let direction_chanched = false;
@@ -13,6 +13,8 @@ set_high_score();
 let speed = 150;
 const std_speed = 150;
 const fas_speed = 50;
+const touch_threshold = 100;
+const touch_pause_threshold = 2;
 
 draw_initaial_field();
 let Interval = setInterval(main_loop, speed);
