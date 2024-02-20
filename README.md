@@ -2,6 +2,8 @@
 ### Controls:
 ##### movement:
 w,a,s,d
+###### or touch:
+the direction, and one tab  is pause
 ##### other:
 Pause: p\
 Faster: f
