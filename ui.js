@@ -16,6 +16,7 @@ function draw_new_field_over_snake() {
 }
 
 function draw_initaial_field() {
+    const tile_widht = 90 / spalten;
     let h = 0;
     while (h < zeilen) {
         let w = 0;
@@ -25,6 +26,7 @@ function draw_initaial_field() {
             element.id = w.toString() + "," + h.toString();
             element.className = "tile";
             element.innerHTML = "";
+            element.style.width = tile_widht + "vw";
             //uneven field get a lighter green
             if (h % 2 == 1 && w % 2 == 0 || h % 2 == 0 && w % 2 == 1) {
                 element.style.backgroundColor = "rgb(10, 191, 5)";
