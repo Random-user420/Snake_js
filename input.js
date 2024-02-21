@@ -25,13 +25,22 @@ function swipe(e) {
     const touch_e_y = e.changedTouches[0].clientY;
 
     if (Math.abs(touch_e_x - touch_s_x) >= Math.abs(touch_e_y - touch_s_y)) { //wich diection is grater
-        if (touch_e_x - touch_s_x >= touch_threshold && !direction_chanched) { direction = [1, 0]; } //if to right is more than the touch_threshold
-        else if (touch_s_x - touch_e_x >= touch_threshold && !direction_chanched) { direction = [-1, 0]; } //if to left is more than the touch_threshold
+        if (touch_e_x - touch_s_x >= touch_threshold && !direction_chanched && direction[0] === 0) {
+            direction = [1, 0];
+        } //if to right is more than the touch_threshold
+        else if (touch_s_x - touch_e_x >= touch_threshold && !direction_chanched && direction[0] === 0) {
+            direction = [-1, 0];
+        } //if to left is more than the touch_threshold
         else if (Math.abs(touch_e_x - touch_s_x) <= touch_pause_threshold) { pause(); } //if its under te pause threshold then pause
     }
-    else if (touch_e_y - touch_s_y >= touch_threshold && !direction_chanched) { direction = [0, 1]; } //if to down is more than the touch_threshold
-    else if (touch_s_y - touch_e_y >= touch_threshold && !direction_chanched) { direction = [0, -1]; } //if to up is more than the touch_threshold
+    else if (touch_e_y - touch_s_y >= touch_threshold && !direction_chanched && direction[1] === 0) {
+        direction = [0, 1];
+    } //if to down is more than the touch_threshold
+    else if (touch_s_y - touch_e_y >= touch_threshold && !direction_chanched && direction[1] === 0) {
+        direction = [0, -1];
+    } //if to up is more than the touch_threshold
     else if (Math.abs(touch_s_y - touch_e_y) <= touch_pause_threshold) { pause(); } //if its under te pause threshold then pause
+    direction_chanched = true;
 }
 
 window.addEventListener("keydown", function (event) {
@@ -64,13 +73,13 @@ window.addEventListener("keydown", function (event) {
 let touch_s_x
 let touch_s_y
 
-document.addEventListener("touchstart", function (event) {
+window.addEventListener("touchstart", function (event) {
     event.preventDefault(); //should prevent zooming and reloading of the page
     touch_s_x = event.touches[0].clientX;
     touch_s_y = event.touches[0].clientY;
-})
+}, { passive: false })
 
-document.addEventListener("touchend", function (event) {
+window.addEventListener("touchend", function (event) {
+    event.preventDefault();
     swipe(event);
-    direction_chanched = true;
-})
+}, { passive: false })
