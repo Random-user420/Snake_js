@@ -114,7 +114,7 @@ function draw_pause_menu() {
 }
 
 function d_right() {
-    if (direction[0] === 0) {
+    if (direction[0] === 0) { //to prevent that the snake goes in the opposite diection of the current
         direction = [1, 0];
     }
 }
@@ -135,17 +135,17 @@ function d_down() {
 }
 
 function swipe(e) {
-    const touch_e_x = e.changedTouches[0].clientX;
+    const touch_e_x = e.changedTouches[0].clientX; //the coordinate at the end of the touch event
     const touch_e_y = e.changedTouches[0].clientY;
 
-    if (Math.abs(touch_e_x - touch_s_x) >= Math.abs(touch_e_y - touch_s_y)) {
-        if (touch_e_x - touch_s_x >= touch_threshold && !direction_chanched) { direction = [1, 0]; }
-        else if (touch_s_x - touch_e_x >= touch_threshold && !direction_chanched) { direction = [-1, 0]; }
-        else if (Math.abs(touch_e_x - touch_s_x) <= touch_pause_threshold) { pause(); }
+    if (Math.abs(touch_e_x - touch_s_x) >= Math.abs(touch_e_y - touch_s_y)) { //wich diection is grater
+        if (touch_e_x - touch_s_x >= touch_threshold && !direction_chanched) { direction = [1, 0]; } //if to right is more than the touch_threshold
+        else if (touch_s_x - touch_e_x >= touch_threshold && !direction_chanched) { direction = [-1, 0]; } //if to left is more than the touch_threshold
+        else if (Math.abs(touch_e_x - touch_s_x) <= touch_pause_threshold) { pause(); } //if its under te pause threshold then pause
     }
-    else if (touch_e_y - touch_s_y >= touch_threshold && !direction_chanched) { direction = [0, 1]; }
-    else if (touch_s_y - touch_e_y >= touch_threshold && !direction_chanched) { direction = [0, -1]; }
-    else if (Math.abs(touch_s_y - touch_e_y) <= touch_pause_threshold) { pause(); }
+    else if (touch_e_y - touch_s_y >= touch_threshold && !direction_chanched) { direction = [0, 1]; } //if to down is more than the touch_threshold
+    else if (touch_s_y - touch_e_y >= touch_threshold && !direction_chanched) { direction = [0, -1]; } //if to up is more than the touch_threshold
+    else if (Math.abs(touch_s_y - touch_e_y) <= touch_pause_threshold) { pause(); } //if its under te pause threshold then pause
 }
 
 window.addEventListener("keydown", function (event) {
@@ -157,7 +157,7 @@ window.addEventListener("keydown", function (event) {
             pause();
             break;
         case 'w':
-            if (!direction_chanched) { d_up(); }
+            if (!direction_chanched) { d_up(); } //to prevent that the diection gets changed twice bevore the snake moved
             direction_chanched = true;
             break;
         case 'a':
@@ -179,7 +179,7 @@ let touch_s_x
 let touch_s_y
 
 document.addEventListener("touchstart", function (event) {
-    event.preventDefault();
+    event.preventDefault(); //should prevent zooming and reloading of the page
     touch_s_x = event.touches[0].clientX;
     touch_s_y = event.touches[0].clientY;
 })
@@ -196,7 +196,7 @@ function check_colition() {
         if (snake_arr[i][0] >= spalten || snake_arr[i][0] < 0 || snake_arr[i][1] >= zeilen || snake_arr[i][1] < 0) {
             return true;
         }
-        //interfiering with itself
+        //interfering with itself
         j = 0;
         while (j < snake_arr.length) {
             if (snake_arr[i][0] == snake_arr[j][0] && snake_arr[i][1] == snake_arr[j][1] && i != j) {
@@ -210,7 +210,7 @@ function check_colition() {
 }
 
 function end() {
-    snake_arr = [[3, 1], [2, 1], [1, 1]];
+    snake_arr = [[3, 1], [2, 1], [1, 1]]; //reset the snake and so on
     direction = [1, 0];
     direction_chanched = false;
     eaten_apple = false;
@@ -221,17 +221,17 @@ function end() {
 
 function pause() {
     if (is_pause) {
-        Interval = setInterval(main_loop, speed);
+        Interval = setInterval(main_loop, speed); //if alredy paused → resume
     }
     else {
-        clearInterval(Interval);
+        clearInterval(Interval); //pause if not
     }
     is_pause = !is_pause;
     draw_pause_menu();
 }
 
 function check_apple() {
-    if (snake_arr[0][0] == apple[0] && snake_arr[0][1] == apple[1]) {
+    if (snake_arr[0][0] == apple[0] && snake_arr[0][1] == apple[1]) { //if the apple is on the first tile of the snake
         apple = create_apple();
         eaten_apple = true;
         score++;
@@ -242,7 +242,7 @@ function create_apple() {
     const x = Math.floor(Math.random() * spalten);
     const y = Math.floor(Math.random() * zeilen);
     let i = 0;
-    while (i < snake_arr.length) {
+    while (i < snake_arr.length) { //prevent from appearing on the snake
         if (snake_arr[i][0] == x && snake_arr[i][1] == y) {
             return create_apple();
         }
@@ -253,27 +253,27 @@ function create_apple() {
 
 function move_snake() {
     if (eaten_apple) {
-        snake_arr.push([null, null]);
+        snake_arr.push([null, null]); //apped an tile to make it longer
         eaten_apple = false;
     }
     let i = snake_arr.length - 1;
     while (i > 0) {
-        snake_arr[i][0] = snake_arr[i - 1][0];
+        snake_arr[i][0] = snake_arr[i - 1][0]; //takes the value from the previous index up to [0]
         snake_arr[i][1] = snake_arr[i - 1][1];
         i--;
     }
-    snake_arr[0][0] += direction[0];
+    snake_arr[0][0] += direction[0]; //adds to the 0 index the direction
     snake_arr[0][1] += direction[1];
 }
 
 function set_high_score() {
-    if (localStorage.getItem("score") === null || localStorage.getItem("score") < score) {
+    if (localStorage.getItem("score") === null || localStorage.getItem("score") < score) { //stores the hight score in the browser local storage
         localStorage.setItem("score", score);
     }
 }
 
 function faster_movement() {
-    if (speed == std_speed) {
+    if (speed == std_speed) {//takes the fas_speed value as speed and restarts the interval to adopt the speed
         speed = fas_speed;
     }
     else {
@@ -298,19 +298,19 @@ const main_gr = document.getElementById("main-grid");
 const zeilen = 33;
 const spalten = Math.floor(((window.innerWidth / window.innerHeight) * (100 / 3)) * 0.90);
 let snake_arr = [[3, 1], [2, 1], [1, 1]];
-let direction = [1, 0];
-let direction_chanched = false;
-let eaten_apple = false;
+let direction = [1, 0]; // direction as a vektor
+let direction_chanched = false; //to prevent to change a direction 2 Times bevore the snake moved
+let eaten_apple = false; //to append a tile to the snake
 let apple = [];
 apple = create_apple();
 let is_pause = false;
 let score = 0;
-set_high_score();
+set_high_score(); //to set a score to read, if this is run for the first time in the browser
 let speed = 150;
 const std_speed = 150;
 const fas_speed = 50;
-const touch_threshold = 100;
-const touch_pause_threshold = 2;
+const touch_threshold = 100; //then it's counted as a swipe i the direction
+const touch_pause_threshold = 2; //under this it is count as a tab to pause and unpause
 
 draw_initaial_field();
 let Interval = setInterval(main_loop, speed);

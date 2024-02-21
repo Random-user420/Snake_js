@@ -31,7 +31,7 @@ function end() {
 
 function pause() {
     if (is_pause) {
-        Interval = setInterval(main_loop, speed); b //if alredy paused → resume
+        Interval = setInterval(main_loop, speed); //if alredy paused → resume
     }
     else {
         clearInterval(Interval); //pause if not
