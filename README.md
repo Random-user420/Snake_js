@@ -1,19 +1,13 @@
 # Snake
-### Controls:
-##### movement:
+## Controls:
+#### movement:
 w,a,s,d\
 p = pause\
 f = faster
-###### or touch:
+#### or touch:
 the direction\
 tab is pause
-### Know, but don't plan to fix:
-
-not native resoluton causes white lines between the tiles\
-fix:\
-use the native resolution and don't scale youre window in the browser
-
-### Tested Browser:
+## Tested Browser:
 Firefox (Linux, Windows)\
 Chromium (Linux)\
 Chrome (Windows)\
