@@ -1,5 +1,13 @@
+const bg_dark = "rgb(5, 160, 0)";
+const bg_light = "rgb(65, 205, 60)";
+const apple_color = "rgb(205, 0, 0)";
+const snake_color = "rgb(60, 60, 240)";
+const main_gr = document.getElementById("main-grid");
+
+
+
 function draw_apple() {
-    document.getElementById(apple.toString()).style.backgroundColor = "rgb(255, 60, 60)"
+    document.getElementById(apple.toString()).style.backgroundColor = apple_color;
 }
 
 function draw_new_field_over_snake() {
@@ -7,9 +15,9 @@ function draw_new_field_over_snake() {
     while (i < snake_arr.length) {
         //uneven field get a lighter green
         if (snake_arr[i][0] % 2 == 1 && snake_arr[i][1] % 2 == 0 || snake_arr[i][0] % 2 == 0 && snake_arr[i][1] % 2 == 1) {
-            document.getElementById(snake_arr[i].toString()).style.backgroundColor = "rgb(10, 191, 5)";
+            document.getElementById(snake_arr[i].toString()).style.backgroundColor = bg_dark;
         } else {
-            document.getElementById(snake_arr[i].toString()).style.backgroundColor = "rgb(65, 255, 60)";
+            document.getElementById(snake_arr[i].toString()).style.backgroundColor = bg_light;
         }
         i++;
     }
@@ -29,9 +37,9 @@ function draw_initaial_field() {
             element.style.width = tile_widht + "vw";
             //uneven field get a lighter green
             if (h % 2 == 1 && w % 2 == 0 || h % 2 == 0 && w % 2 == 1) {
-                element.style.backgroundColor = "rgb(10, 191, 5)";
+                element.style.backgroundColor = bg_dark;
             } else {
-                element.style.backgroundColor = "rgb(65, 255, 60)";
+                element.style.backgroundColor = bg_light;
             }
             main_gr.appendChild(element);
             w++;
@@ -43,7 +51,7 @@ function draw_initaial_field() {
 function draw_snake() {
     let i = 0;
     while (i < snake_arr.length) {
-        document.getElementById(snake_arr[i].toString()).style.backgroundColor = "rgb(60, 60, 255)";
+        document.getElementById(snake_arr[i].toString()).style.backgroundColor = snake_color;
         i++;
     }
     direction_chanched = false;

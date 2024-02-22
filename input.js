@@ -1,3 +1,11 @@
+const std_speed = 150;
+const fas_speed = 50;
+const touch_threshold = 100; //then it's counted as a swipe i the direction
+const touch_pause_threshold = 2; //under this it is count as a tab to pause and unpause
+let is_pause = false;
+let direction_chanched = false; //to prevent to change a direction 2 Times bevore the snake moved
+
+
 
 function d_right() {
     if (direction[0] === 0) { //to prevent that the snake goes in the opposite diection of the current

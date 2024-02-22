@@ -1,3 +1,10 @@
+let eaten_apple = false; //to append a tile to the snake
+const zeilen = 33;
+const spalten = Math.floor(((window.innerWidth / window.innerHeight) * (100 / 3)) * 0.90);
+let snake_arr = [[3, 1], [2, 1], [1, 1]];
+let direction = [1, 0]; // direction as a vektor
+
+
 function check_colition() {
     let i = 0;
     let j = 0;
