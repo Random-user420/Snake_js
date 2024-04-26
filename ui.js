@@ -48,6 +48,18 @@ function draw_initaial_field() {
     }
 }
 
+function clear_field() {
+    let h = 0;
+    while (h < zeilen) {
+        let w = 0;
+        while (w < lastSpalten) {
+            document.getElementById(w.toString() + "," + h.toString()).remove();
+            w++;
+        }
+        h++;
+    }
+}
+
 function draw_snake() {
     let i = 0;
     while (i < snake_arr.length) {

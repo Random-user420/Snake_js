@@ -2,7 +2,8 @@ if __name__ == "__main__":
     f = open("styles.css", 'r')
     css = f.read()
     f.close()
-    bundle = f'<!DOCTYPE html>\n<html>\n<head>\n<style>\n{css}\n</style>\n</head>\n<body id="body">\n<div class="main-grid" id="main-grid">'
+    bundle = f'<!DOCTYPE html>\n<html>\n<head>\n<style>\n{css}\n</style>\n<meta charset="UTF-8"/>\n'
+    bundle += '<title>Hello World!</title>\n</head>\n<body id="body">\n<div class="main-grid" id="main-grid">'
     bundle += f'</div>\n<div id="pause" class="pause">Press \'P\' to unpause</div>\n<div id="score" class="score">Score: <br> Hight score:</div>\n'
     f = open("init.js", 'r')
     init = f.read()

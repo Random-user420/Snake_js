@@ -1,9 +1,9 @@
 let eaten_apple = false; //to append a tile to the snake
 const zeilen = 33;
-const spalten = Math.floor(((window.innerWidth / window.innerHeight) * (100 / 3)) * 0.90);
+let spalten = Math.floor(((window.innerWidth / window.innerHeight) * (100 / 3)) * 0.90);
+let lastSpalten;
 let snake_arr = [[3, 1], [2, 1], [1, 1]];
 let direction = [1, 0]; // direction as a vektor
-
 
 function check_colition() {
     let i = 0;
@@ -67,7 +67,6 @@ function create_apple() {
     }
     return [x, y]
 }
-
 function move_snake() {
     if (eaten_apple) {
         snake_arr.push([null, null]); //apped an tile to make it longer
@@ -101,3 +100,32 @@ function faster_movement() {
         Interval = setInterval(main_loop, speed);
     }
 }
+
+function resize() {
+    lastSpalten = spalten;
+    spalten = Math.floor(((window.innerWidth / window.innerHeight) * (100 / 3)) * 0.90);
+    if (!pause) { 
+        pause = true;
+        clearInterval(Interval);
+        draw_pause_menu();
+    }
+    if (check_colition()) {
+        let i = 0;
+        while (i < snake_arr.length) {
+            snake_arr[i] = [snake_arr.length - i, 1];
+            i++;
+        }
+    }
+    direction = [1, 0];
+    direction_chanched = false;
+    eaten_apple = false;
+    clear_field();
+    draw_initaial_field();
+    draw_snake();
+    if (apple[0] >= spalten || apple[1] >= zeilen) {
+        apple = create_apple();
+    }
+    draw_apple();
+}
+
+window.addEventListener('resize', resize);
