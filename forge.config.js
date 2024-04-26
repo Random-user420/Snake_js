@@ -8,7 +8,7 @@ module.exports = {
   rebuildConfig: {},
   makers: [
     {
-      name: '@electron-forge/maker-squirrel',
+      name: '@electron-forge/maker-deb',
       config: {
         options: {
           categories: ['Game']
@@ -16,7 +16,7 @@ module.exports = {
       }
     },
     {
-      name: '@electron-forge/maker-deb',
+      name: '@electron-forge/maker-rpm',
       config: {
         options: {
           categories: ['Game']

@@ -2,6 +2,7 @@
 
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
+if (require('electron-squirrel-startup')) app.quit();
 const path = require('node:path')
 
 const createWindow = () => {
