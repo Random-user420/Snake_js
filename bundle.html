@@ -343,12 +343,12 @@ function resize() {
         let i = 0;
         while (i < snake_arr.length) {
             snake_arr[i] = [snake_arr.length - i, 1];
+            direction = [1, 0];
+            direction_chanched = false;
+            eaten_apple = false;
             i++;
         }
     }
-    direction = [1, 0];
-    direction_chanched = false;
-    eaten_apple = false;
     clear_field();
     draw_initaial_field();
     draw_snake();
