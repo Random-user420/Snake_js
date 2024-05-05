@@ -3,7 +3,7 @@ const zeilen = 33;
 let spalten = Math.floor(((window.innerWidth / window.innerHeight) * (100 / 3)) * 0.90);
 let lastSpalten;
 let snake_arr = [[3, 1], [2, 1], [1, 1]];
-let direction = [1, 0]; // direction as a vektor
+let direction = [1, 0]; // direction as a vector
 
 function check_colition() {
     let i = 0;
@@ -38,7 +38,7 @@ function end() {
 
 function pause() {
     if (is_pause) {
-        Interval = setInterval(main_loop, speed); //if alredy paused → resume
+        Interval = setInterval(main_loop, speed); //if already paused → resume
     }
     else {
         clearInterval(Interval); //pause if not
