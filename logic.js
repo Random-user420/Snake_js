@@ -123,17 +123,17 @@ function resize() {
 }
 
 function rest_snake() {
-    var spalten_ = spalten - 1;
+    var spalten_ = spalten - 1; //so the snake is not on the edge odf the field
     for (var i = 0; i < snake_arr.length; i++) {
-        if (i + 1 <= spalten_) {
+        if (i + 1 <= spalten_) { //if it is in the first line do standart drawing for faster resizing
             snake_arr[snake_arr.length - i - 1] = [i + 1, 1];
         } else {
-            if (Math.floor(i / spalten_) % 2 === 0) {
-                snake_arr[snake_arr.length - i - 1][0] = 1 + (i - Math.floor(i / spalten_) * spalten_);
+            if (Math.floor(i / spalten_) % 2 === 0) { // determinates in which line the snake is, so if the snake goes in the right or left direction
+                snake_arr[snake_arr.length - i - 1][0] = 1 + (i - Math.floor(i / spalten_) * spalten_); //snake goes in the right direction
             } else {
-                snake_arr[snake_arr.length - i - 1][0] = spalten_ - (i - spalten_ * Math.floor(i / spalten_));
+                snake_arr[snake_arr.length - i - 1][0] = spalten_ - (i - spalten_ * Math.floor(i / spalten_)); //snake goes left
             }
-            snake_arr[snake_arr.length - i - 1][1] = 1 + Math.floor(i / spalten_);
+            snake_arr[snake_arr.length - i - 1][1] = 1 + Math.floor(i / spalten_); // the y position of the snake
         }
     }
 }
