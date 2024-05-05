@@ -11,7 +11,8 @@ module.exports = {
       name: '@electron-forge/maker-deb',
       config: {
         options: {
-          categories: ['Game']
+          categories: ['Game'],
+          icon: './images/icon.png'
         }
       }
     },
@@ -19,7 +20,8 @@ module.exports = {
       name: '@electron-forge/maker-rpm',
       config: {
         options: {
-          categories: ['Game']
+          categories: ['Game'],
+          icon: './images/icon.png'
         }
       }
     }
