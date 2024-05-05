@@ -116,7 +116,7 @@ function resize() {
     clear_field();
     draw_initaial_field();
     draw_snake();
-    if (apple[0] >= spalten || apple[1] >= zeilen) {
+    if (apple[0] >= spalten) {
         apple = create_apple();
     }
     draw_apple();
